@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kubernetes Live Demo</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      margin-top: 80px;
+      background: #0f172a;
+      color: white;
+    }
+
+    .box {
+      padding: 30px;
+      background: #1e293b;
+      display: inline-block;
+      border-radius: 12px;
+      width: 400px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #3b82f6;
+      color: white;
+      font-size: 14px;
+    }
+
+    #output {
+      margin-top: 15px;
+      padding: 10px;
+      background: #0f172a;
+      border-radius: 8px;
+      min-height: 40px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <h2>🚀 Kubernetes Live Demo</h2>
+
+    <p>Frontend → Backend API via Ingress</p>
+
+    <button onclick="callAPI()">Check Backend Status</button>
+
+    <div id="output">Click button to call backend...</div>
+  </div>
+
+  <script>
+    async function callAPI() {
+      const output = document.getElementById("output");
+      output.innerHTML = "Calling backend...";
+
+      try {
+        const res = await fetch("/api");
+        const data = await res.json();
+        output.innerHTML =
+          "✅ Response:<br><pre>" + JSON.stringify(data, null, 2) + "</pre>";
+      } catch (err) {
+        output.innerHTML = "❌ Error calling backend";
+      }
+    }
+  </script>
+</body>
+</html>
