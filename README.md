@@ -54,4 +54,118 @@ kube-proxy load balancing
    ↓
 Pod (nginx container)​
 
+
+----
+🚀 README.md (Kubernetes Microservices Ingress Demo)
+# Kubernetes Microservices + Ingress Demo
+
+A fully working Kubernetes-based microservices system demonstrating:
+- Frontend service (NGINX)
+- Backend API service (HashiCorp HTTP Echo)
+- Kubernetes Services (ClusterIP)
+- Ingress-based routing
+- ConfigMap-driven frontend UI
+- Local Kubernetes deployment via Minikube
+
+---
+
+## 🧠 Architecture Overview
+
+The system demonstrates end-to-end request flow through Kubernetes networking layers:
+
+- `/` → Frontend (NGINX)
+- `/api` → Backend API service via Ingress
+
+---
+
+## ⚙️ Tech Stack
+
+- Kubernetes (Minikube)
+- kubectl
+- NGINX (Frontend)
+- HashiCorp HTTP Echo (Backend)
+- Kubernetes Ingress Controller
+- ConfigMaps
+
+---
+
+## 🚀 Features
+
+### Frontend
+- Static HTML UI served via NGINX
+- Button triggers backend API call (`/api`)
+- Styled dashboard interface
+
+### Backend
+- Lightweight HTTP API using `hashicorp/http-echo`
+- Returns JSON response:
+  ```json
+  {"message": "Hello from backend API"}
+Kubernetes
+Deployments for frontend and backend
+ClusterIP Services for internal routing
+Ingress for external HTTP routing
+Namespace isolation (demo)
+🔁 Request Flow
+User visits http://demo.local
+Ingress routes request to frontend service
+UI triggers /api call
+Ingress routes /api → backend service
+Backend returns JSON response
+UI renders result dynamically
+🧪 How to Run
+minikube start --driver=docker
+kubectl apply -f k8s/
+kubectl get pods -n demo
+
+Enable ingress:
+
+minikube addons enable ingress
+
+Map host:
+
+echo "$(minikube ip) demo.local" | sudo tee -a /etc/hosts
+
+Access:
+
+http://demo.local
+📊 Key Learnings
+Kubernetes service discovery
+Ingress routing rules
+ConfigMap-based frontend injection
+Microservice communication in K8s
+Debugging multi-layer networking issues
+📌 Author
+
+Built as a Kubernetes learning + systems design demo project.
+
+
+---
+
+# 🧭 Architecture Diagram
+
+## Option 1 — Mermaid (GitHub-friendly)
+
+```mermaid
+graph TD
+    U[User Browser] --> I[Ingress Controller]
+
+    I --> F[Frontend Service (NGINX)]
+    I --> B[Backend Service]
+
+    F --> P1[Frontend Pod]
+    B --> P2[Backend Pod]
+
+    P1 -->|fetch /api| I
+    I --> B
+    B --> P2
+Option 2 — Clean mental model (for interviews)
+User
+  ↓
+Ingress (demo.local router)
+  ↓───────────────↓
+Frontend        Backend API
+(NGINX)        (http-echo)
+  ↓               ↓
+ConfigMap     JSON Response
 <img width="2878" height="1752" alt="image" src="https://github.com/user-attachments/assets/c924aa1b-4f34-450b-981c-bca6c4cf5b6b" />
