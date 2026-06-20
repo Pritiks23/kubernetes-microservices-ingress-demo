@@ -144,22 +144,8 @@ Built as a Kubernetes learning + systems design demo project.
 
 # 🧭 Architecture Diagram
 
-## Option 1 — Mermaid (GitHub-friendly)
 
-```mermaid
-graph TD
-    U[User Browser] --> I[Ingress Controller]
-
-    I --> F[Frontend Service (NGINX)]
-    I --> B[Backend Service]
-
-    F --> P1[Frontend Pod]
-    B --> P2[Backend Pod]
-
-    P1 -->|fetch /api| I
-    I --> B
-    B --> P2
-Option 2 — Clean mental model (for interviews)
+— Clean mental model (for interviews)
 User
   ↓
 Ingress (demo.local router)
